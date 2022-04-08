@@ -1366,19 +1366,20 @@ class LatLngPopup(MacroElement):
             {% macro script(this, kwargs) %}
                 var {{this.get_name()}} = L.popup();
                 function latLngPop(e) {
+                data = e.latlng.lat.toFixed(4) + "," + e.latlng.lng.toFixed(4);
                     {{this.get_name()}}
                         .setLatLng(e.latlng)
-                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
-                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
-                        .openOn({{this._parent.get_name()}});
+                        .setContent( "<br /><a href="+data+"> click </a>")
+                        .openOn({{this._parent.get_name()}})
                     }
                 {{this._parent.get_name()}}.on('click', latLngPop);
+
             {% endmacro %}
             """)  # noqa
 
     def __init__(self):
         super(LatLngPopup, self).__init__()
-        self._name = 'LatLngPopup'
+        self._name = 'LatLngPopup
 
 
 class ClickForMarker(MacroElement):
